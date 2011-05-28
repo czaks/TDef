@@ -22,13 +22,13 @@ module TDef
       # Please don't construct a bullet directly. Use
       # _Tower#shoot_.
       def initialize(source_tower, destination_monster)
-	@source = source_tower
-	@destination = destination_monster
-	
-	@destination_position = @destination.position
-	@damage = source_tower.damage
-	
-	super(@source.position)
+        @source = source_tower
+        @destination = destination_monster
+        
+        @destination_position = @destination.position
+        @damage = source_tower.damage
+        
+        super(@source.position)
       end
       
       # Speed of the bullet. In one field of grid per second.

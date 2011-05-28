@@ -15,8 +15,8 @@ module TDef::Model
       
       # Iterate over the scores
       def each(&block)
-	load
-	@scores.each &block
+        load
+        @scores.each &block
       end
       
     private

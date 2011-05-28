@@ -10,18 +10,18 @@ module TDef
     # @abstract
     class Monster < GameObject
       class << self
-	# Returns array with all monsters available.
-	def get_all
-	end
+        # Returns array with all monsters available.
+        def get_all
+        end
       end
       # Please don't construct a monster directly. To get a massive
       # monster attack, you can see the *Player* class or the *Wave*
       # class. To get one monster, it would be the best to use the
       # *Scene* class.
       def initialize(position)
-	super(position)
-	@alive = 1
-	@hp = max_hp
+        super(position)
+        @alive = 1
+        @hp = max_hp
       end
       
       # A boolean value showing whether the object is still alive

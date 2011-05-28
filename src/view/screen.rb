@@ -1,3 +1,7 @@
+require "config"
+require "rubygems"
+require "sdl"
+
 module TDef
   module View
     # Abstract, extensible class controlling screen and peripherials using
@@ -9,10 +13,19 @@ module TDef
       class << self
 	# Initialize graphical subsystem
 	def init
+	  SDL.init(SDL::INIT_VIDEO)
+	  SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 0, SDL::DOUBLEBUF)
 	end
 	
 	# Deinitialize graphical subsystem
 	def deinit
+	  SDL.quit
+	end
+      end
+      
+      def initialize
+	Thread.new do
+	  main_loop
 	end
       end
 	

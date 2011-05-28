@@ -7,6 +7,11 @@ module TDef::Model
   class Difficulty
     # 0 is easy, 1 is medium, 2 is hard - loads the wanted _level_.
     def initialize(level)
+      change level
+    end
+    
+    # Changes level
+    def change(level)
     end
     
     # Returns a word for "easy", "normal" and "hard"

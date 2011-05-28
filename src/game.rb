@@ -26,10 +26,20 @@ module TDef
       attr_reader :screen
 	
       # Initialize game classes and SDL
-      def init; end
+      def init
+	View::Screen.init
+	
+	@player = Player.new
+	@screen = View::Screen.new
+	@wave = Model::Wave.new
+	@difficulty = Model::Difficulty.new(1)
+	@scene = Scene.new
+      end
 	
       # Quit the whole program.
-      def deinit; end
+      def deinit
+	Screen.deinit
+      end
 
       # Change screen to another (eg. *GameScreen*, or nil)
       def replace_screen(screen_class); end
@@ -45,21 +55,31 @@ module TDef
       end
 	
       # Starts the game
-      def start; end
+      def start
+	@running = 1
+      end
 
       # Unpauses, when it's paused
-      def unpause; end
+      def unpause
+	@paused = 0
+      end
 	
       # Pauses, when it's unpaused
-      def pause; end
+      def pause
+	@paused = 1
+      end
 	
       # Stops the game
-      def stop; end
+      def stop
+	@running = 0
+      end
 
 	  
       def main_loop
 	loop do
-	  single_step
+	  if @running and !@paused
+	    single_step
+	  end
 	  sleep Config.sleep_between_cycles
 	end
       end

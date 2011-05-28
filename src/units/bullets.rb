@@ -21,10 +21,10 @@ module TDef
       def image;		"images/bullets/poisonbullet.jpg"	end
       def image_dimensions;	[10,10]					end
       def speed;		0.12					end
-	
+        
       def finished
-	destination.poisoned = 1 if destination.alive
-	super
+        destination.poisoned = 1 if destination.alive
+        super
       end
     end
     
@@ -33,10 +33,10 @@ module TDef
       def image;		"images/bullets/icebullet.jpg"	end
       def image_dimensions;	[10,10]					end
       def speed;		0.12					end
-	
+        
       def finished
-	destination.frozen = 1 if destination.alive
-	super
+        destination.frozen = 1 if destination.alive
+        super
       end
     end
   end

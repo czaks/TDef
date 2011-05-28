@@ -8,12 +8,12 @@ module TDef
     class BasicSubscreen < Subscreen
       # No direct drawing.
       def draw
-	raise NoMethodError, "`draw' method is not available in BasicSubscreen class"
+        raise NoMethodError, "`draw' method is not available in BasicSubscreen class"
       end
       
       # No receiving of events.
       def handle_event
-	raise NoMethodError, "`handle_event' method is not available in BasicSubscreen class"
+        raise NoMethodError, "`handle_event' method is not available in BasicSubscreen class"
       end
     end
   end

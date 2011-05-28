@@ -14,7 +14,7 @@ module TDef
       # since it's not needed. All you need is to extend the *InternalScreen*
       # and overload the private _single_step_ method.
       def get_event
-	_get_event
+        _get_event
       end
     end
   end

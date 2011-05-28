@@ -1,4 +1,5 @@
 require "player"
+require "config"
 require "model/wave"
 require "scene"
 require "model/difficulty"
@@ -56,7 +57,12 @@ module TDef
       def stop; end
 
 	  
-      def main_loop; end
+      def main_loop
+	loop do
+	  single_step
+	  sleep Config.sleep_between_cycles
+	end
+      end
 	
     private
       def single_step; end

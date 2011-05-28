@@ -32,7 +32,7 @@ module TDef
       # the computer is running faster when it's set to a
       # lower value.
       attr_reader :sleep_between_cycles
-      @sleep_between_cycles = 0.1
+      @sleep_between_cycles = 0.02
       
       # The amount of money you get at the start of the game.
       attr_reader :money_at_start

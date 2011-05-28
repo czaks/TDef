@@ -11,24 +11,24 @@ module TDef
       include Enumerable
       
       class << self
-        # Initialize graphical subsystem
-        def init
-          SDL.init(SDL::INIT_VIDEO)
-          SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 0, SDL::DOUBLEBUF)
-        end
-        
-        # Deinitialize graphical subsystem
-        def deinit
-          SDL.quit
-        end
+	# Initialize graphical subsystem
+	def init
+	  SDL.init(SDL::INIT_VIDEO)
+	  SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 0, SDL::DOUBLEBUF)
+	end
+	
+	# Deinitialize graphical subsystem
+	def deinit
+	  SDL.quit
+	end
       end
       
       def initialize
-        Thread.new do
-          main_loop
-        end
+	Thread.new do
+	  main_loop
+	end
       end
-        
+	
       # Redraws the window by redrawing all the subscreens.
       def draw
       end
@@ -39,7 +39,7 @@ module TDef
       
       # Is the screen still active?
       def is_active?
-        @active
+	@active
       end
       
       # Thread of the graphical loop

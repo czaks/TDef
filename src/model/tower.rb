@@ -12,19 +12,19 @@ module TDef
     # @abstract
     class Tower < GameObject
       class << self
-        # Returns an array with all towers available.
-        def get_all
-        end
-        
-        # Returns an array with all basic towers
-        def get_all_basic
-          get_all_upgrades Tower
-        end
-        
-        # Returns an array with all towers which are derived from
-        # the _tower_class_
-        def get_all_upgrades(tower_class)
-        end
+	# Returns an array with all towers available.
+	def get_all
+	end
+	
+	# Returns an array with all basic towers
+	def get_all_basic
+	  get_all_upgrades Tower
+	end
+	
+	# Returns an array with all towers which are derived from
+	# the _tower_class_
+	def get_all_upgrades(tower_class)
+	end
       end
       
       # Sholud return a human-readable name of the tower.

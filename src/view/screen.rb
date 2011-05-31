@@ -10,6 +10,8 @@ module TDef
     class Screen
       include Enumerable
       
+      attr_accessor :active
+      
       class << self
         # Initialize graphical subsystem
         def init
@@ -24,6 +26,7 @@ module TDef
       end
       
       def initialize
+        @active = true
         Thread.new do
           main_loop
         end
@@ -35,6 +38,9 @@ module TDef
       
       # Main loop getting events from users
       def main_loop
+        while is_active?
+          single_step
+        end
       end
       
       # Is the screen still active?

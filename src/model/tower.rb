@@ -1,5 +1,5 @@
 require "gameobject"
-require "difficulty"
+require "game"
 
 require "units/towers"
 
@@ -14,6 +14,7 @@ module TDef
       class << self
         # Returns an array with all towers available.
         def get_all
+          ObjectSpace.each_object.to_a.select { |a| a.class == Class && a.ancestors.include?(Tower) && a != Tower }
         end
         
         # Returns an array with all basic towers
@@ -24,6 +25,7 @@ module TDef
         # Returns an array with all towers which are derived from
         # the _tower_class_
         def get_all_upgrades(tower_class)
+          ObjectSpace.each_object.to_a.select { |a| a.class == Class && a.superclass == tower_class }
         end
       end
       
@@ -64,6 +66,23 @@ module TDef
       # works by searching for monsters in its range and when it finds
       # any, it evaluates the _Tower#shoot_ method.
       def move
+        if @bullet_waittime
+          bullet_waittime -= 1
+        else
+          mons = Game.scene.monsters.select do |m|
+            t_x, t_y = *location
+            m_x, m_y = *m.location
+            
+            range <= Math.sqrt((m_x-t_x) * (m_x-t_x) + (m_y-t_y) * (m_y-t_y))
+          end
+          
+          mons.sort { |a,b| a.location[0] <=> b.location[0] }
+
+          if monster = mons.pop
+            bullet_waittime = reload_time
+            Game.scene.create_bullet self, monster
+          end
+        end
       end
       
     private

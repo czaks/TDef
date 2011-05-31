@@ -11,7 +11,7 @@ module TDef
       def resolution;		[800, 600]			end
       
       # Grid dimensions.
-      def map_size;		[17, 15]			end
+      def map_size;		[12, 11]			end
       
       
       ############
@@ -53,9 +53,6 @@ module TDef
       
       # Background image of the grid.
       def background_image;	"images/bgimg.png"		end
-      
-      # Highscore file.
-      def highscore_file;	"data/highscore.dat"		end
     end
   end
 end

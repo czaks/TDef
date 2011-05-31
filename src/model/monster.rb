@@ -1,7 +1,9 @@
 require "gameobject"
-require "difficulty"
+require "game"
 
 require "units/monsters"
+
+require "view/endgamescreen"
 
 module TDef
   module Model    
@@ -12,6 +14,7 @@ module TDef
       class << self
         # Returns array with all monsters available.
         def get_all
+          ObjectSpace.each_object.to_a.select { |a| a.class == Class && a.superclass == Monster }
         end
       end
       # Please don't construct a monster directly. To get a massive
@@ -70,9 +73,9 @@ module TDef
       # The monster movement. Once per cycle. Monsters move
       # towards _Config.monsters_end_at_ place. 
       def move
+        
       end
       
-    private
       # Set by an _IceTower#finished_ method. True/False. Makes
       # the monster slower.
       attr_accessor :frozen
@@ -82,12 +85,20 @@ module TDef
       # being executed.
       attr_accessor :poisoned
       
+    private
       # When one monster comes at a _Config.monsters_end_at_
       # place, a _Monster#finished_ function is executed, which
       # takes one life from player away, a _Monster#alive_ is
       # modified to point to false and *Scene* finally removes
       # the monster from the grid.
       def finished
+        if Game.player.lifes <= 0
+          Game.stop
+        else
+          Game.player.lifes -= 1
+          self.alive = false
+          Scene.remove_object self
+        end
       end
     end
   end

@@ -2,8 +2,8 @@ require "player"
 require "config"
 require "model/wave"
 require "scene"
-require "model/difficulty"
 require "view/screen"
+require "view/gamescreen"
 
 module TDef
   # Static, final class. Includes main game logic.
@@ -19,9 +19,6 @@ module TDef
       # A *Scene* class instance
       attr_reader :scene
       
-      # A *Difficulty* class instance
-      attr_reader :difficulty
-      
       # A *Screen* class instance
       attr_reader :screen
         
@@ -29,20 +26,22 @@ module TDef
       def init
         View::Screen.init
         
-        @player = Player.new
-        @screen = View::Screen.new
-        @wave = Model::Wave.new
-        @difficulty = Model::Difficulty.new(1)
-        @scene = Scene.new
+        @player = nil
+        @screen = nil
+        @wave = nil
+        @scene = nil
       end
         
       # Quit the whole program.
       def deinit
-        Screen.deinit
+        View::Screen.deinit
       end
 
       # Change screen to another (eg. *GameScreen*, or nil)
-      def replace_screen(screen_class); end
+      def replace_screen(screen_class)
+        @screen.active = false if @screen
+        @screen = screen_class.new
+      end
 
       # Is the game running now?
       def running?
@@ -57,6 +56,10 @@ module TDef
       # Starts the game
       def start
         @running = 1
+        replace_screen GameScreen
+        @player = Player.new
+        @wave = Model::Wave.new
+        @scene = Scene.new
       end
 
       # Unpauses, when it's paused
@@ -72,6 +75,9 @@ module TDef
       # Stops the game
       def stop
         @running = 0
+        @wave = nil
+        @scene = nil
+        Game.replace_screen View::EndGameScreen
       end
 
           
@@ -85,10 +91,11 @@ module TDef
       end
         
     private
-      def single_step; end
-        
-      # Game-oriented thread (running main loop) or nil if there's none
-      attr_reader :thread
+      def single_step
+        scene.monsters.each { |i| i.move }
+        scene.towers.each { |i,j| j.move }
+        scene.bullets.each { |i| i.move }
+      end
     end
   end
 end

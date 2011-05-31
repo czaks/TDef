@@ -7,6 +7,7 @@ module TDef
       # It's not a good way to create new objects using constructors,
       # you'd better use *Scene*, or even *Player* if possible.
       def initialize (position)
+        @position = position
       end
       
       # Image representing the object. Should be overloaded.

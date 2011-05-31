@@ -13,7 +13,7 @@ module TDef
     class Rocket < Model::Bullet
       def image;		"images/bullets/rocket.jpg"		end
       def image_dimensions;	[10,10]					end
-      def speed;		0.07					end
+      def speed;		0.20					end
     end
     
     # PoisoningBullet is shot by *PoisoningTower*

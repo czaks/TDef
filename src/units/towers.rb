@@ -78,7 +78,7 @@ module TDef
     
     # EliteFreezingTower shots faster and has a better range
     class EliteFreezingTower < FreezingTower
-      def image;		"images/towers/freezing.jpg"		end
+      def image;		"images/towers/elitefreezing.jpg"		end
       def image_dimensions;	[40,40]					end
       def name;			"Elite Freezing Tower"			end
       def cost;			65					end

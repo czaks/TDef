@@ -1,5 +1,4 @@
 require "gameobject"
-require "difficulty"
 
 require "units/bullets"
 

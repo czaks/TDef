@@ -4,6 +4,12 @@ module TDef
   class Player
     attr_accessor :score, :cash, :lifes
     
+    def initialize
+      @score = 0
+      @cash = Config.money_at_start
+      @lifes = Config.lifes_at_start
+    end
+    
     # Buys a tower. position is a pair of the grid coordinates.
     def buy_tower(tower_class, position)
     end

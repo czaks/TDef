@@ -48,14 +48,9 @@ module TDef
       
       # Every next wave would increase that number by...
       def wavepoints_increase;	2				end
-      
-      
-      ###############
-      # File config #
-      ###############
-      
-      # Background image of the grid.
-      def background_image;	"images/bgimg.png"		end
+
+      # Push a monster every n seconds
+      def push_monster_every;	0.5				end
     end
   end
 end

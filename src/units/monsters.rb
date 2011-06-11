@@ -4,7 +4,7 @@ module TDef
   module Units
     # Worm - normal HP, normal speed
     class Worm < Model::Monster
-      def image;		"images/monsters/worm.jpg"		end
+      def image;		"images/monsters/worm.bmp"		end
       def image_dimensions;	[40,40]					end
       def max_hp;		40					end
       def speed;		0.04					end
@@ -16,7 +16,7 @@ module TDef
     
     # Tank - high HP, normal speed
     class Tank < Model::Monster
-      def image;		"images/monsters/tank.jpg"		end
+      def image;		"images/monsters/tank.bmp"		end
       def image_dimensions;	[40,40]					end
       def max_hp;		90					end
       def speed;		0.035					end
@@ -28,7 +28,7 @@ module TDef
     
     # Rabbit - normal HP, high speed
     class Rabbit < Model::Monster
-      def image;		"images/monsters/rabbit.jpg"		end
+      def image;		"images/monsters/rabbit.bmp"		end
       def image_dimensions;	[40,40]					end
       def max_hp;		45					end
       def speed;		0.08					end
@@ -40,7 +40,7 @@ module TDef
     
     # Boss - high HP, high speed
     class Boss < Model::Monster
-      def image;		"images/monsters/boss.jpg"		end
+      def image;		"images/monsters/boss.bmp"		end
       def image_dimensions;	[40,40]					end
       def max_hp;		130					end
       def speed;		0.06					end

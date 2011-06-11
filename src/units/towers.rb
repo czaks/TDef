@@ -6,7 +6,7 @@ module TDef
   module Units
     # ShootingTower is a cheap and basic tower
     class ShootingTower < Model::Tower
-      def image;		"images/towers/shooting.jpg"		end
+      def image;		"images/towers/shooting.bmp"		end
       def image_dimensions;	[40,40]					end
       def name;			"Shooting Tower"			end
       def cost;			25					end
@@ -18,7 +18,7 @@ module TDef
     
     # EliteShootingTower is an upgraded ShootingTower
     class EliteShootingTower < ShootingTower
-      def image;		"images/towers/eliteshooting.jpg"	end
+      def image;		"images/towers/eliteshooting.bmp"	end
       def image_dimensions;	[40,40]					end
       def name;			"Elite Shooting Tower"			end
       def cost;			50					end
@@ -30,7 +30,7 @@ module TDef
     
     # PoisoningTower deals damage to the opponents by poisoning them
     class PoisoningTower < ShootingTower
-      def image;		"images/towers/poisoning.jpg"		end
+      def image;		"images/towers/poisoning.bmp"		end
       def image_dimensions;	[40,40]					end
       def name;			"Poisoning Tower"			end
       def cost;			65					end
@@ -42,7 +42,7 @@ module TDef
     
     # RocketTower is a better choice in the later game
     class RocketTower < Model::Tower
-      def image;		"images/towers/rocket.jpg"		end
+      def image;		"images/towers/rocket.bmp"		end
       def image_dimensions;	[40,40]					end
       def name;			"Rocket Tower"				end
       def cost;			65					end
@@ -54,7 +54,7 @@ module TDef
     
     # EliteRocketTower is the upgraded RocketTower
     class EliteRocketTower < RocketTower
-      def image;		"images/towers/eliterocket.jpg"		end
+      def image;		"images/towers/eliterocket.bmp"		end
       def image_dimensions;	[40,40]					end
       def name;			"Elite Rocket Tower"			end
       def cost;			65					end
@@ -66,7 +66,7 @@ module TDef
     
     # FreezingTower makes the opponents move slower
     class FreezingTower < Model::Tower
-      def image;		"images/towers/freezing.jpg"		end
+      def image;		"images/towers/freezing.bmp"		end
       def image_dimensions;	[40,40]					end
       def name;			"Freezing Tower"			end
       def cost;			65					end
@@ -78,7 +78,7 @@ module TDef
     
     # EliteFreezingTower shots faster and has a better range
     class EliteFreezingTower < FreezingTower
-      def image;		"images/towers/elitefreezing.jpg"		end
+      def image;		"images/towers/elitefreezing.bmp"		end
       def image_dimensions;	[40,40]					end
       def name;			"Elite Freezing Tower"			end
       def cost;			65					end

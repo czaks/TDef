@@ -58,20 +58,22 @@ module TDef
         @running = true
 	@paused = false
 	
-        replace_screen View::GameScreen
         @player = Player.new
         @wave = Model::Wave.new
         @scene = Scene.new
+	replace_screen View::GameScreen
       end
 
       # Unpauses, when it's paused
       def unpause
         @paused = false
+	Game.screen.draw
       end
       
       # Pauses, when it's unpaused
       def pause
         @paused = true
+	Game.screen.draw
       end
         
       # Stops the game

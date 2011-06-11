@@ -1,4 +1,5 @@
 require "config"
+
 module TDef::Model
   # Wave class - controls the coming of the monsters.
   class Wave

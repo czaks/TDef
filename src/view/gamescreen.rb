@@ -30,6 +30,8 @@ module TDef
 	case e
 	when SDL::Event2::Quit
 	  Game.stop
+	when SDL::Event::Active # Let's draw the main screen as soon as possible
+	  draw
 	end
       end
     end

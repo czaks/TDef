@@ -5,7 +5,7 @@ module TDef
     # Abstract class describing part of the window.
     class Subscreen
       def initialize
-        @surface = SDL::Surface.new(SDL::SWSURFACE, size[0], size[1], Screen.handle)
+        @surface = SDL::Surface.new(SDL::DOUBLEBUF, size[0], size[1], Screen.handle)
       end
       
       # Drawing method to overload. Use SDL.

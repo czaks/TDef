@@ -14,9 +14,13 @@ module TDef
       
       # Method to draw the screen.
       def draw
-	super
+        super
+        Config.map_size[1].times do |y|
+          Config.map_size[0].times do |x|
+            @surface.draw_rect(Config.part_size[0]*x,Config.part_size[1]*y,Config.part_size[0],Config.part_size[1],Screen.handle.format.mapRGB( 0, 0, 0))
+          end
+        end
       end
-      
       # Handle the events (mouse clicks, etc.)
       def handle_event(event, clicked = false)
       end

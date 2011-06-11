@@ -17,6 +17,8 @@ module TDef
         def init
           SDL.init(SDL::INIT_VIDEO)
           self.handle = SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 24, SDL::SWSURFACE)
+          SDL::TTF.init
+          self.font = SDL::TTF.open("images/ttf/DejaVuSans.ttf", 20, 0)
         end
         
         # Deinitialize graphical subsystem
@@ -25,6 +27,7 @@ module TDef
         end
         
         attr_accessor :handle
+        attr_accessor :font
       end
       
       def initialize

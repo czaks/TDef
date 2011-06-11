@@ -14,12 +14,28 @@ module TDef
       
       # Method to draw the top bar.
       def draw
-	super
+        super
+        Screen.font.draw_blended_utf8(@surface, "MONEY: #{Game.player.cash}$", 10, 9, 0, 0, 0)
+        Screen.font.draw_blended_utf8(@surface, "SCORE: #{Game.player.score}", 260, 9, 0, 0, 0)
+        Screen.font.draw_blended_utf8(@surface, "LIFES: #{Game.player.lifes}", 500, 9, 0, 0, 0)
+        Screen.font.draw_blended_utf8(@surface, "PAUSE", 617, 9, 0, 0, 0)
+        Screen.font.draw_blended_utf8(@surface, "QUIT", 725, 9, 0, 0, 0)
+        @surface.draw_rect(600,0,100,40,Screen.handle.format.mapRGB( 0, 0, 0))
+        @surface.draw_rect(700,0,100,40,Screen.handle.format.mapRGB( 0, 0, 0))
       end
       
       # We don't need to handle events here, there's
       # nothing to click
       def handle_event(event, clicked = false)
+        if clicked == true
+          if event[0] >= 600 and event[0] < 700
+            Game.pause if Game.unpaused
+            Game.unpause if Game.paused
+          end
+          if event[0] >= 700 and event[0] <800
+            Game.stop
+          end
+        end
       end
     end
   end

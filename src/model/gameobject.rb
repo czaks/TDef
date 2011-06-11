@@ -6,8 +6,10 @@ module TDef
       # Initializer. Creates some game object at position on the grid.
       # It's not a good way to create new objects using constructors,
       # you'd better use *Scene*, or even *Player* if possible.
-      def initialize (position)
-        @position = position
+      def initialize (position=nil)
+	if position
+	  @position = position
+	end
       end
       
       # Image representing the object. Should be overloaded.

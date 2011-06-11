@@ -1,9 +1,5 @@
-require "gameobject"
+require "model/gameobject"
 require "game"
-
-require "units/monsters"
-
-require "view/endgamescreen"
 
 module TDef
   module Model    
@@ -21,10 +17,12 @@ module TDef
       # monster attack, you can see the *Player* class or the *Wave*
       # class. To get one monster, it would be the best to use the
       # *Scene* class.
-      def initialize(position)
+      def initialize(position=nil)
         super(position)
-        @alive = 1
-        @hp = max_hp
+	if position
+	  @alive = 1
+	  @hp = max_hp
+	end
       end
       
       # A boolean value showing whether the object is still alive
@@ -105,3 +103,5 @@ module TDef
     end
   end
 end
+
+require "units/monsters"

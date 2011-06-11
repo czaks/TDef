@@ -1,6 +1,8 @@
 require "config"
 require "rubygems"
+require "thread"
 require "sdl"
+require "view/image"
 
 module TDef
   module View
@@ -19,6 +21,8 @@ module TDef
           self.handle = SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 24, SDL::DOUBLEBUF)
 	  SDL::TTF.init
 	  self.font = SDL::TTF.open("images/ttf/DejaVuSans.ttf", 20, 0)
+	  
+	  self.drawing = Mutex.new
         end
         
         # Deinitialize graphical subsystem
@@ -28,6 +32,7 @@ module TDef
         
         attr_accessor :handle
 	attr_accessor :font
+	attr_accessor :drawing
       end
       
       def initialize
@@ -40,12 +45,14 @@ module TDef
         
       # Redraws the window by redrawing all the subscreens.
       def draw
-	each do |i|
-	  i.draw
-	  SDL::Surface.blit(i.surface, 0, 0, i.size[0], i.size[1], Screen.handle, i.start[0], i.start[1])
+	Screen.drawing.synchronize do
+	  each do |i|
+	    i.draw
+	    SDL::Surface.blit(i.surface, 0, 0, i.size[0], i.size[1], Screen.handle, i.start[0], i.start[1])
+	  end
+	  
+	  Screen.handle.flip
 	end
-	
-	Screen.handle.flip
       end
       
       # Main loop getting events from users

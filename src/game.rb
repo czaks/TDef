@@ -59,8 +59,8 @@ module TDef
 	@paused = false
 	
         @player = Player.new
+	@scene = Scene.new
         @wave = Model::Wave.new
-        @scene = Scene.new
 	replace_screen View::GameScreen
       end
 

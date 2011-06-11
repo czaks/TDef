@@ -96,8 +96,6 @@ module TDef
     # A placeholder (*Placement*) being used now to create a tower.
     # _nil_, if that's not the case.
     attr_reader :placed_tower
-    
-  private
  
     # An array containing all monsters visible on the map.
     attr_reader :monsters

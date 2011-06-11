@@ -25,7 +25,7 @@ module TDef
       # Initialize game classes and SDL
       def init
         View::Screen.init
-        
+        replace_screen View::GameScreen
         @player = nil
         @screen = nil
         @wave = nil
@@ -55,8 +55,10 @@ module TDef
         
       # Starts the game
       def start
-        @running = 1
-        replace_screen GameScreen
+        @running = true
+	@paused = false
+	
+        replace_screen View::GameScreen
         @player = Player.new
         @wave = Model::Wave.new
         @scene = Scene.new
@@ -64,20 +66,21 @@ module TDef
 
       # Unpauses, when it's paused
       def unpause
-        @paused = 0
+        @paused = false
       end
-        
+      
       # Pauses, when it's unpaused
       def pause
-        @paused = 1
+        @paused = true
       end
         
       # Stops the game
       def stop
-        @running = 0
+        @running = false
         @wave = nil
         @scene = nil
-        Game.replace_screen View::EndGameScreen
+        #Game.replace_screen View::EndGameScreen
+        exit 0
       end
 
           
@@ -92,9 +95,11 @@ module TDef
         
     private
       def single_step
-        scene.monsters.each { |i| i.move }
-        scene.towers.each { |i,j| j.move }
-        scene.bullets.each { |i| i.move }
+        @scene.towers.each { |i,j| j.move }
+        @scene.bullets.each { |i| i.move }
+        @scene.monsters.each { |i| i.move }
+	
+	@screen.draw
       end
     end
   end

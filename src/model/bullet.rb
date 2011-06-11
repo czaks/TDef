@@ -1,4 +1,5 @@
 require "gameobject"
+require "game"
 
 require "units/bullets"
 
@@ -24,7 +25,6 @@ module TDef
         @source = source_tower
         @destination = destination_monster
         
-        @destination_position = @destination.position
         @damage = source_tower.damage
         
         super(@source.position)
@@ -38,6 +38,18 @@ module TDef
       
       # Bullet movement, it's run once per a cycle.
       def move
+        if !destination.alive
+          Game.scene.remove_object self
+        else
+          d_x, d_y = *destination.location
+          b_x, b_y = *location
+          
+          if d_x.round == b_x.round and d_y.round == b_y.round
+            finished
+          else
+            
+          end
+        end
       end
       
     private
@@ -61,6 +73,7 @@ module TDef
       # this method, but remember to use super to call the
       # parent!
       def finished
+        destination.hp -= damage
       end
     end
   end

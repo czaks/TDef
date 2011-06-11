@@ -73,7 +73,9 @@ module TDef
       # The monster movement. Once per cycle. Monsters move
       # towards _Config.monsters_end_at_ place. 
       def move
-        
+        if hp < 0
+          Game.scene.remove_object self
+        end
       end
       
       # Set by an _IceTower#finished_ method. True/False. Makes

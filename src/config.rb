@@ -11,7 +11,10 @@ module TDef
       def resolution;		[800, 600]			end
       
       # Grid dimensions.
-      def map_size;		[12, 11]			end
+      def map_size;		[15, 14]			end
+        
+      # One part size
+      def part_size;            [40, 40]                        end
       
       
       ############

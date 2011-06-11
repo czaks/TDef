@@ -44,10 +44,10 @@ module TDef
       # 5 wavepoints can allow 5 monsters with wavecost 1 come
       # to your grid, or 2 monsters with wavecost 2 and 1 with
       # 1. This is the starting wavepoints setting.
-      def wavepoints_at_start;	5				end
+      def wavepoints_at_start;	5.0				end
       
       # Every next wave would increase that number by...
-      def wavepoints_increase;	2				end
+      def wavepoints_increase;	2.0				end
 
       # Push a monster every n seconds
       def push_monster_every;	0.5				end

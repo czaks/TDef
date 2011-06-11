@@ -20,12 +20,17 @@ module TDef
     def upgrade_tower(new_class, old_tower)
     end
     
+    def can_trigger_next_wave?()
+      Game.wave.last_wave_ended
+    end
+    
     # Triggers a next wave by user.
     def next_wave()
     end
     
     # Checks whether the player can afford a tower of _tower_class_.
     def affords?(tower_class)
+      @cash >= tower_class.new.cost
     end
   end
 end

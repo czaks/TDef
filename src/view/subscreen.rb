@@ -11,8 +11,8 @@ module TDef
       # Drawing method to overload. Use SDL.
       # @virtual
       def draw
-        @surface.fillRect(0, 0, size[0]-1, size[1]-1, Screen.handle.format.mapRGB(255,255,255))
-        @surface.drawRect(0, 0, size[0]-1, size[1]-1, Screen.handle.format.mapRGB(  0,  0,  0))
+        @surface.fill_rect(0, 0, size[0]-1, size[1]-1, Screen.handle.format.mapRGB(255,255,255))
+        @surface.draw_rect(0, 0, size[0]-1, size[1]-1, Screen.handle.format.mapRGB(  0,  0,  0))
       end
       
       # The parent screen, variable set by it when issuing _add_subscreen_

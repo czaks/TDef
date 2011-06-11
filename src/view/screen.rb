@@ -112,7 +112,7 @@ module TDef
       # Internal function used by get_event. Doesn't broadcast to subscreens.
       # Do not use, unless overloading.
       def _get_event
-        SDL::Event2.poll
+        SDL::Event2.wait
       end
       
       attr_reader :subscreens

@@ -26,6 +26,11 @@ module TDef
       # Poll constantly for events and react apropriately.
       def single_step
 	e = get_event
+	
+	case e
+	when SDL::Event2::Quit
+	  Game.stop
+	end
       end
     end
   end

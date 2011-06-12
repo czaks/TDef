@@ -61,7 +61,7 @@ module TDef
       def monsters
 	wp = Config.wavepoints_at_start + Config.wavepoints_increase * (number - 1)
 	
-	allmons = Monster.get_all.delete_if { |i| i.new.min_wave < number or i.new.wavecost > wp }
+	allmons = Monster.get_all.delete_if { |i| i.new.min_wave > number or i.new.wavecost > wp }
 	sending = []
 	
 	while allmons.size > 0

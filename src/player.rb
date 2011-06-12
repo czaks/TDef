@@ -12,6 +12,8 @@ module TDef
     
     # Buys a tower. position is a pair of the grid coordinates.
     def buy_tower(tower_class, position)
+      Game.scene.selected_tower = Game.scene.create_tower(tower_class, position)
+      @cash -= Game.scene.selected_tower.cost
     end
     
     def sell_tower(tower)

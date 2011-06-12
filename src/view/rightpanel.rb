@@ -15,7 +15,7 @@ module TDef
       # Method to draw the panel.
       def draw
       super
-      Screen.font.draw_blended_utf8(@surface, "WAVE: 5", 10, 9, 0, 0, 0)
+      Screen.font.draw_blended_utf8(@surface, "WAVE: #{Game.wave.number}", 6, 9, 0, 0, 0)
       Screen.font.draw_blended_utf8(@surface, "NEXT", 122, 9, 0, 0, 0)
       Screen.font.draw_blended_utf8(@surface, "BUILDINGS:", 44, 49, 0, 0, 0)
       Screen.font.draw_blended_utf8(@surface, "SHOOTING", 50, 89, 0, 0, 0)
@@ -42,6 +42,7 @@ module TDef
       
       # Handle the events (button clicks, etc.)
       def handle_event(event, clicked = false)
+	Game.scene.create_placement(Units::ShootingTower) if clicked
 	#p [event, clicked]
       end
     end

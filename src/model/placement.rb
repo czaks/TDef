@@ -1,4 +1,4 @@
-require "gameobject"
+require "model/gameobject"
 
 module TDef
   module Model    
@@ -7,16 +7,15 @@ module TDef
       
       def initialize(tower_class)
         @tower_class = tower_class
-        new
-        super([0,0])
+        super([-1,-1])
       end
       
       def image
-        tower_class.new([0,0]).image
+        tower_class.new.image
       end
       
       def image_size
-        tower_class.new([0,0]).image_size
+        tower_class.new.image_size
       end
     end
   end

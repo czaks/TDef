@@ -1,4 +1,6 @@
 require "config"
+require "model/placement"
+require "thread"
 
 module TDef
   # A final, static class defining operations on the map. The methods
@@ -22,16 +24,37 @@ module TDef
     # This is done in order to check if we can put a tower at an
     # arbitary place.
     def shortest_path_from(from, check=nil)
-      x,y = *from
-      return false if @towers[x, y] or check == from
-      return true if from == Config.monsters_end_at
+      dirs = [ [1,0], [0,1], [0,-1], [-1,0] ]
       
-      return [1,0]  if shortest_path_from([x+1, y])
-      return [-1,0] if shortest_path_from([x-1, y])
-      return [0,1]  if shortest_path_from([x, y+1])
-      return [0,-1] if shortest_path_from([x, y-1])
+      #return [1,0]
       
-      return false
+      unless @cache and @cached_for == towers.keys+[check]
+	marked = {}
+	marked.default = false
+
+	q = [Config.monsters_end_at]
+	first = 0
+	
+	marked[Config.monsters_end_at] = true
+	
+	while first < q.size
+	  v = q[first]
+	  first += 1
+	  for i in dirs
+	    w = [v[0]+i[0], v[1]+i[1]]
+	    next if w != Config.monsters_start_at and w != Config.monsters_end_at and
+		  (w[0] < 0 or w[1] < 0 or w[0] >= Config.map_size[0] or w[1] >= Config.map_size[1])
+	    next if marked[w] or w == check or towers[w]
+	    marked[w] = [-i[0], -i[1] ]
+	    q << w
+	  end
+	end
+	
+	@cached_for = towers.keys+[check]
+	@cache = marked
+      end
+            
+      return @cache[from]
     end
     
     # Returns a pair being the size of the grid.
@@ -49,7 +72,7 @@ module TDef
     # coordinates.
     def create_tower(tower_class, position)
       tower = tower_class.new(position)
-      @towers[old_tower.position] = tower
+      @towers[position] = tower
       tower
     end
     
@@ -62,7 +85,7 @@ module TDef
     # Removes any sort of *GameObject* from the class.
     def remove_object(gameobject)
       @monsters.delete gameobject
-      @tower.delete gameobject
+      @towers.delete_if { |a,b| b == gameobject }
       @bullets.delete gameobject
     end
     
@@ -73,7 +96,7 @@ module TDef
     
     # Creates a tower placeholder imitating a tower from _tower_class_.
     def create_placement(tower_class)
-      @placed_tower = Placement.new(tower_class)
+      @placed_tower = Model::Placement.new(tower_class)
     end
     
     # This method is used to extract the drawable objects by the
@@ -91,11 +114,11 @@ module TDef
     end
     
     # A tower selected at the moment. _nil_, if nothing's selected.
-    attr_reader :selected_tower
+    attr_accessor :selected_tower
     
     # A placeholder (*Placement*) being used now to create a tower.
     # _nil_, if that's not the case.
-    attr_reader :placed_tower
+    attr_accessor :placed_tower
  
     # An array containing all monsters visible on the map.
     attr_reader :monsters

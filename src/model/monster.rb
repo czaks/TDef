@@ -22,6 +22,8 @@ module TDef
 	if position
 	  @alive = 1
 	  @hp = max_hp
+	  
+	  @dir = false
 	end
       end
       
@@ -67,13 +69,50 @@ module TDef
       # @virtual
       def cash
       end
-      
+            
       # The monster movement. Once per cycle. Monsters move
       # towards _Config.monsters_end_at_ place. 
       def move
-        if hp < 0
-          Game.scene.remove_object self
-        end
+	if hp <= 0
+	  Game.player.score += score
+	  Game.player.cash += cash
+	  
+	  self.alive = false
+	  Game.scene.remove_object self
+	end
+	finished if Config.monsters_end_at[0] == position[0] and Config.monsters_end_at[1] == position[1]
+	return unless self.alive
+	
+	if !@dir
+	  @dir = Game.scene.shortest_path_from position
+	  finished if @dir == true
+	  return unless self.alive
+	  @goal = [position[0].round + @dir[0], position[1].round + @dir[1]]
+	else
+	  if Game.scene.towers[@goal]
+	    @dir = false
+	    @position[0] = @position[0].round
+	    @position[1] = @position[1].round
+	    return
+	  end
+	  
+	  position[0] += @dir[0] * speed
+	  position[1] += @dir[1] * speed
+	  
+	  if (@dir[0] < 0 and position[0] <= @goal[0]) or (@dir[0] > 0 and position[0] >= @goal[0]) or
+	     (@dir[1] < 0 and position[1] <= @goal[1]) or (@dir[1] > 0 and position[1] >= @goal[1])
+	    
+	    @dir = Game.scene.shortest_path_from @goal
+	    finished if @dir == true
+	    return unless self.alive
+	    
+	    waitingmove = (position[0]-@goal[0]).abs + (position[1]-@goal[1]).abs
+	    @position = @goal
+	    @goal = [position[0].round + @dir[0], position[1].round + @dir[1]]
+	    @position[0] += waitingmove * @dir[0]
+	    @position[1] += waitingmove * @dir[1]
+	  end
+	end
       end
       
       # Set by an _IceTower#finished_ method. True/False. Makes
@@ -97,7 +136,7 @@ module TDef
         else
           Game.player.lifes -= 1
           self.alive = false
-          Scene.remove_object self
+          Game.scene.remove_object self
         end
       end
     end

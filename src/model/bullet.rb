@@ -1,7 +1,5 @@
-require "gameobject"
+require "model/gameobject"
 require "game"
-
-require "units/bullets"
 
 module TDef
   module Model    
@@ -27,7 +25,7 @@ module TDef
         
         @damage = source_tower.damage
         
-        super(@source.position)
+        super(@source.position.dup)
       end
       
       # Speed of the bullet. In one field of grid per second.
@@ -41,13 +39,19 @@ module TDef
         if !destination.alive
           Game.scene.remove_object self
         else
-          d_x, d_y = *destination.location
-          b_x, b_y = *location
+          d_x, d_y = *destination.position
+          b_x, b_y = *position
           
           if d_x.round == b_x.round and d_y.round == b_y.round
             finished
           else
-            
+            vlen = Math.sqrt((d_x - b_x)*(d_x - b_x) + (d_y - b_y)*(d_y - b_y))
+	    
+	    m_x = (d_x - b_x)*speed/vlen
+	    m_y = (d_y - b_y)*speed/vlen
+	    
+	    position[0] += m_x
+	    position[1] += m_y
           end
         end
       end
@@ -74,7 +78,10 @@ module TDef
       # parent!
       def finished
         destination.hp -= damage
+	Game.scene.remove_object self
       end
     end
   end
 end
+
+require "units/bullets"

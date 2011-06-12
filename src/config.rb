@@ -22,10 +22,10 @@ module TDef
       ############
       
       # Monsters starting location
-      def monsters_start_at;	[0, map_size[1]/2]		end
+      def monsters_start_at;	[-1, map_size[1]/2]		end
       
       # Monsters starting location
-      def monsters_end_at;	[map_size[0]-1, map_size[1]/2]	end
+      def monsters_end_at;	[map_size[0], map_size[1]/2]	end
       
       # Time to sleep between cycles. In seconds. Obviously,
       # the computer is running faster when it's set to a
@@ -44,13 +44,13 @@ module TDef
       # 5 wavepoints can allow 5 monsters with wavecost 1 come
       # to your grid, or 2 monsters with wavecost 2 and 1 with
       # 1. This is the starting wavepoints setting.
-      def wavepoints_at_start;	5.0				end
+      def wavepoints_at_start;	5				end
       
       # Every next wave would increase that number by...
-      def wavepoints_increase;	2.0				end
+      def wavepoints_increase;	2				end
 
       # Push a monster every n seconds
-      def push_monster_every;	0.5				end
+      def push_monster_every;	2				end
     end
   end
 end

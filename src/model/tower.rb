@@ -1,7 +1,5 @@
-require "gameobject"
+require "model/gameobject"
 require "game"
-
-require "units/towers"
 
 module TDef
   module Model    
@@ -29,7 +27,12 @@ module TDef
         end
       end
       
-      # Sholud return a human-readable name of the tower.
+      def initialize(position=nil)
+	super(position)
+	@bullet_waittime = reload_time
+      end
+      
+      # Should return a human-readable name of the tower.
       def name
       end
       
@@ -66,20 +69,20 @@ module TDef
       # works by searching for monsters in its range and when it finds
       # any, it evaluates the _Tower#shoot_ method.
       def move
-        if @bullet_waittime
-          bullet_waittime -= 1
+        if @bullet_waittime > 0
+          @bullet_waittime -= 1
         else
           mons = Game.scene.monsters.select do |m|
-            t_x, t_y = *location
-            m_x, m_y = *m.location
+            t_x, t_y = *position
+            m_x, m_y = *m.position
             
-            range <= Math.sqrt((m_x-t_x) * (m_x-t_x) + (m_y-t_y) * (m_y-t_y))
+            range >= Math.sqrt((m_x-t_x) * (m_x-t_x) + (m_y-t_y) * (m_y-t_y))
           end
           
-          mons.sort { |a,b| a.location[0] <=> b.location[0] }
+          mons.sort { |a,b| a.position[0] <=> b.position[0] }.reverse
 
           if monster = mons.pop
-            bullet_waittime = reload_time
+            @bullet_waittime = reload_time
             Game.scene.create_bullet self, monster
           end
         end
@@ -100,3 +103,5 @@ module TDef
     end
   end
 end
+
+require "units/towers"

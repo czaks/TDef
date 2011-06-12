@@ -4,6 +4,7 @@ require "model/wave"
 require "scene"
 require "view/screen"
 require "view/gamescreen"
+require "thread"
 
 module TDef
   # Static, final class. Includes main game logic.
@@ -30,6 +31,8 @@ module TDef
         @screen = nil
         @wave = nil
         @scene = nil
+	
+	@moving = Mutex.new
       end
         
       # Quit the whole program.
@@ -84,8 +87,7 @@ module TDef
         #Game.replace_screen View::EndGameScreen
         exit 0
       end
-
-          
+      
       def main_loop
         loop do
           if @running and !@paused
@@ -94,12 +96,16 @@ module TDef
           sleep Config.sleep_between_cycles
         end
       end
+      
+      attr_accessor :moving
         
     private
       def single_step
         @scene.towers.each { |i,j| j.move }
         @scene.bullets.each { |i| i.move }
-        @scene.monsters.each { |i| i.move }
+	moving.synchronize do
+	  @scene.monsters.each { |i| i.move }
+        end
 	
 	@screen.draw
       end

@@ -18,7 +18,7 @@ module TDef
         # Initialize graphical subsystem
         def init
           SDL.init(SDL::INIT_VIDEO)
-          self.handle = SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 24, SDL::DOUBLEBUF)
+          self.handle = SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 24, SDL::DOUBLEBUF) # | SDL::FULLSCREEN)
 	  SDL::TTF.init
 	  self.font = SDL::TTF.open("images/ttf/DejaVuSans.ttf", 20, 0)
 	  

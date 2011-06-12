@@ -17,9 +17,14 @@ module TDef
     end
     
     def sell_tower(tower)
+      @cash += tower.cost * 2 / 3
+      Game.scene.selected_tower = nil
+      Game.scene.remove_object tower
     end
       
     def upgrade_tower(new_class, old_tower)
+      Game.scene.selected_tower = Game.scene.upgrade_tower(new_class, old_tower)
+      @cash -= Game.scene.selected_tower.cost
     end
     
     def can_trigger_next_wave?()
@@ -28,9 +33,10 @@ module TDef
     
     # Triggers a next wave by user.
     def next_wave()
+      Game.wave.start_next
     end
     
-    # Checks whether the player can afford a tower of _tower_class_.
+    # Checks whether the player can afford a tower of _tower_class_ (maybe upgrading?).
     def affords?(tower_class)
       @cash >= tower_class.new.cost
     end

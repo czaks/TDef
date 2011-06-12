@@ -102,7 +102,7 @@ module TDef
     private
       def single_step
         @scene.towers.each { |i,j| j.move }
-        @scene.bullets.each { |i| i.move }
+        @scene.bullets.each { |i| i.move if i }
 	moving.synchronize do
 	  @scene.monsters.each { |i| i.move }
         end

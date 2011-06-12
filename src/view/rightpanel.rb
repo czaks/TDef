@@ -42,7 +42,9 @@ module TDef
       
       # Handle the events (button clicks, etc.)
       def handle_event(event, clicked = false)
-	Game.scene.create_placement(Units::ShootingTower) if clicked
+	if Game.player.affords? Units::ShootingTower
+	  Game.scene.create_placement(Units::ShootingTower) if clicked
+	end
 	#p [event, clicked]
       end
     end

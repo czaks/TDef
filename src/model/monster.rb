@@ -69,11 +69,24 @@ module TDef
       # @virtual
       def cash
       end
+      
+      # Effective speed
+      def effective_speed
+	if frozen
+	  speed / 2
+	else
+	  speed
+	end
+      end
             
       # The monster movement. Once per cycle. Monsters move
       # towards _Config.monsters_end_at_ place. 
       def move
-	if hp <= 0
+	if poisoned
+	  @hp = @hp * 40 / 41
+	end
+	
+	if @hp <= 0
 	  Game.player.score += score
 	  Game.player.cash += cash
 	  
@@ -96,8 +109,8 @@ module TDef
 	    return
 	  end
 	  
-	  position[0] += @dir[0] * speed
-	  position[1] += @dir[1] * speed
+	  position[0] += @dir[0] * effective_speed
+	  position[1] += @dir[1] * effective_speed
 	  
 	  if (@dir[0] < 0 and position[0] <= @goal[0]) or (@dir[0] > 0 and position[0] >= @goal[0]) or
 	     (@dir[1] < 0 and position[1] <= @goal[1]) or (@dir[1] > 0 and position[1] >= @goal[1])

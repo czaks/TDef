@@ -72,13 +72,21 @@ module TDef
 	Game.scene.get_drawable_objects.each do |i|
 	  position = grids_to_pixels(i.position)
 	  if i.class <= Model::Monster # Drawing HP lines
-	    @surface.draw_line(position[0]-12, position[1]-18, position[0]+12, position[1]-18, Screen.handle.format.mapRGB(0xaa, 0xaa, 0xaa))
-	    @surface.draw_line(position[0]-12, position[1]-17, position[0]+12, position[1]-17, Screen.handle.format.mapRGB(0xaa, 0xaa, 0xaa))
+	    color = Screen.handle.format.mapRGB(0xaa, 0xaa, 0xaa)
+	    if i.poisoned
+	      color = Screen.handle.format.mapRGB(0xff, 0x00, 0xff)
+	    end
+	    @surface.draw_line(position[0]-12, position[1]-18, position[0]+12, position[1]-18, color)
+	    @surface.draw_line(position[0]-12, position[1]-17, position[0]+12, position[1]-17, color)
 	    
 	    line_len = i.hp * 24 / i.max_hp
 	    
-	    @surface.draw_line(position[0]-12, position[1]-18, position[0]-12+line_len, position[1]-18, Screen.handle.format.mapRGB(0x00, 0xff, 0x00))
-	    @surface.draw_line(position[0]-12, position[1]-17, position[0]-12+line_len, position[1]-17, Screen.handle.format.mapRGB(0x00, 0xff, 0x00))
+	    color = Screen.handle.format.mapRGB(0x00, 0xff, 0x00)
+	    if i.frozen
+	      color = Screen.handle.format.mapRGB(0x00, 0xff, 0xff)
+	    end
+	    @surface.draw_line(position[0]-12, position[1]-18, position[0]-12+line_len, position[1]-18, color)
+	    @surface.draw_line(position[0]-12, position[1]-17, position[0]-12+line_len, position[1]-17, color)
 	  end
 	  position[0] -= i.image_size[0]/2
 	  position[1] -= i.image_size[1]/2

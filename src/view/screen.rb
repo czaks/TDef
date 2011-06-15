@@ -20,7 +20,8 @@ module TDef
           SDL.init(SDL::INIT_VIDEO)
           self.handle = SDL.set_video_mode(Config.resolution[0], Config.resolution[1], 24, SDL::DOUBLEBUF) # | SDL::FULLSCREEN)
 	  SDL::TTF.init
-	  self.font = SDL::TTF.open("images/ttf/DejaVuSans.ttf", 20, 0)
+	  self.font = SDL::TTF.open("images/ttf/DejaVuSans.ttf", 18, 0)
+	  self.smallfont = SDL::TTF.open("images/ttf/DejaVuSans.ttf", 10, 0)
 	  
 	  self.drawing = Mutex.new
         end
@@ -31,7 +32,7 @@ module TDef
         end
         
         attr_accessor :handle
-	attr_accessor :font
+	attr_accessor :font, :smallfont
 	attr_accessor :drawing
       end
       

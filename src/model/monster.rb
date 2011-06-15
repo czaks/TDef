@@ -83,7 +83,7 @@ module TDef
       # towards _Config.monsters_end_at_ place. 
       def move
 	if poisoned
-	  @hp = @hp * 40 / 41
+	  @hp = @hp * 200 / 201
 	end
 	
 	if @hp <= 0

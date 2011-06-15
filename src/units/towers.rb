@@ -20,7 +20,7 @@ module TDef
     class EliteShootingTower < ShootingTower
       def image;		"images/towers/eliteshooting.png"	end
       def image_size;		[40,40]					end
-      def name;			"Elite Shooting Tower"			end
+      def name;			"Elite Shooting T."			end
       def cost;			50					end
       def damage;		10					end
       def range;		1.9					end
@@ -34,7 +34,7 @@ module TDef
       def image_size;		[40,40]					end
       def name;			"Poisoning Tower"			end
       def cost;			65					end
-      def damage;		15					end
+      def damage;		0					end
       def range;		1.8					end
       def reload_time;		20					end
       def bullet_class;		PoisoningBullet				end
@@ -46,7 +46,7 @@ module TDef
       def image_size;		[40,40]					end
       def name;			"Rocket Tower"				end
       def cost;			65					end
-      def damage;		15					end
+      def damage;		30					end
       def range;		3.8					end
       def reload_time;		31					end
       def bullet_class;		Rocket					end
@@ -56,9 +56,9 @@ module TDef
     class EliteRocketTower < RocketTower
       def image;		"images/towers/eliterocket.png"		end
       def image_size;		[40,40]					end
-      def name;			"Elite Rocket Tower"			end
+      def name;			"Elite Rocket T."			end
       def cost;			65					end
-      def damage;		15					end
+      def damage;		50					end
       def range;		3.8					end
       def reload_time;		20					end
       def bullet_class;		Rocket					end
@@ -70,7 +70,7 @@ module TDef
       def image_size;		[40,40]					end
       def name;			"Freezing Tower"			end
       def cost;			65					end
-      def damage;		15					end
+      def damage;		0					end
       def range;		1.8					end
       def reload_time;		15					end
       def bullet_class;		IceBullet				end
@@ -80,9 +80,9 @@ module TDef
     class EliteFreezingTower < FreezingTower
       def image;		"images/towers/elitefreezing.png"	end
       def image_size;		[40,40]					end
-      def name;			"Elite Freezing Tower"			end
+      def name;			"Elite Freezing T."			end
       def cost;			65					end
-      def damage;		15					end
+      def damage;		0					end
       def range;		2.1					end
       def reload_time;		12					end
       def bullet_class;		IceBullet				end
